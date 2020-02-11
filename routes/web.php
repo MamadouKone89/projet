@@ -11,10 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/login');
 
-Auth::routes();
+Auth::routes(['register' => false]);
+
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
+    
+    Route::resource('users', 'UsersController');
+    Route::resource('roles', 'RoleController');
+
+});

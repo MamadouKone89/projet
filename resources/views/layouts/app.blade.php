@@ -11,6 +11,16 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/buttons.dataTables.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/coreui.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/min/dropzone.min.css') }}" rel="stylesheet" />
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -64,6 +74,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+                                    <a class="dropdown-item"  href="{{route('admin.users.index')}}">Liste des utilisateurs</a>
                                 </div>
                             </li>
                         @endguest
@@ -76,5 +87,26 @@
             @yield('content')
         </main>
     </div>
+    <script src="{{asset('js/app.js')}}"></script>
+     <script src="{{ asset('js/jquery.min.js') }}"></script>
+ <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+ <script src="{{ asset('js/popper.min.js') }}"></script>
+ <script src="{{ asset('js/coreui.min.js') }}"></script>
+ <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+ <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+ <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
+ <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
+ <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
+ <script src="{{ asset('js/buttons.print.min.js') }}"></script>
+ <script src="{{ asset('js/buttons.colVis.min.js') }}"></script>
+ <script src="{{ asset('js/pdfmake.min.js') }}"></script>
+ <script src="{{ asset('js/vfs_fonts.js') }}"></script>
+ <script src="{{ asset('js/jszip.min.js') }}"></script>
+ <script src="{{ asset('js/dataTables.select.min.js') }}"></script>
+ <script src="{{ asset('js/ckeditor.js') }}"></script>
+ <script src="{{ asset('js/moment.min.js') }}"></script>
+ <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
+ <script src="{{ asset('js/select2.full.min.js') }}"></script>
+ <script src="{{ asset('js/min/dropzone.min.js') }}"></script>
 </body>
 </html>
