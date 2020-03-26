@@ -1,108 +1,163 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
-use App\Role;
-use App\User;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\DataTables\Admin\RoleDataTable;
+use App\Http\Requests\Admin\CreateRoleRequest;
+use App\Http\Requests\Admin\UpdateRoleRequest;
+use App\Repositories\Admin\RoleRepository;
+use Flash;
+use App\Http\Controllers\AppBaseController;
+use Response;
+use App\Util\HttpUtil;
 
-class RoleController extends Controller
+class RoleController extends AppBaseController
 {
+    /** @var  RoleRepository */
+    private $roleRepository;
 
-
-    public function __construct(){
-
+    public function __construct(RoleRepository $roleRepo)
+    {
+        $this->roleRepository = $roleRepo;
         $this->middleware('auth');
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the Role.
      *
-     * @return \Illuminate\Http\Response
+     * @param RoleDataTable $roleDataTable
+     * @return Response
      */
-    public function index()
+    public function index(RoleDataTable $roleDataTable)
     {
-        $roles = Role::all();
-
-        return view('admin.roles.index', compact('roles'));
+        return $roleDataTable->render('admin.roles.index');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new Role.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
-       // $permissions = Permission::get()->pluck('name', 'name');
-
-        return view('admin.roles.create', compact('roles'));
+        return view('admin.roles.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Role in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateRoleRequest $request
+     *
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateRoleRequest $request)
     {
-        $role = Role::create($request->all());
-       
- 
-         return redirect()->route('admin.roles.index');
+        $inputs = $request->all();
+        $message = 'Role enregistré avec succès.';
+
+        $this->roleRepository->create($inputs);
+
+        if($request->ajax()) {
+            return HttpUtil::sendSuccessDialogResponse($message);
+        }
+        Flash::success($message);
+
+        return redirect(route('admin.roles.index'));
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Role.
      *
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @return Response
      */
-    public function show(Role $role)
+    public function show($id)
     {
-        return view('admin.roles.show', compact('role'));
+        $role = $this->roleRepository->find($id);
+
+        if (empty($role)) {
+            Flash::error('Role introuvable');
+
+            return redirect(route('admin.roles.index'));
+        }
+
+        return view('admin.roles.show')->with('role', $role);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified Role.
      *
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @return Response
      */
-    public function edit(Role $role)
+    public function edit($id)
     {
-        return view('admin.roles.edit', [
-            'role' => $role
-        ] );
+        $role = $this->roleRepository->find($id);
+
+        if (empty($role)) {
+            Flash::error('Role introuvable');
+
+            return redirect(route('admin.roles.index'));
+        }
+
+        return view('admin.roles.edit')->with('role', $role);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Role in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param  int              $id
+     * @param UpdateRoleRequest $request
+     *
+     * @return Response
      */
-    public function update(Request $request, Role $role)
+    public function update($id, UpdateRoleRequest $request)
     {
-        $role->update($request->all());
-       
+        $role = $this->roleRepository->find($id);
 
-        return redirect()->route('admin.roles.index');
+        if (empty($role)) {
+            Flash::error('Role introuvable');
+
+            return redirect(route('admin.roles.index'));
+        }
+        $message = 'Role mis à jour avec succès.';
+
+        $role = $this->roleRepository->update($request->all(), $id);
+        if($request->ajax()) {
+            return HttpUtil::sendSuccessDialogResponse($message, false);
+        }
+
+        Flash::success($message);
+
+        return redirect(route('admin.roles.index'));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Role from storage.
      *
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @return Response
      */
-    public function destroy(Role $role)
+    public function destroy($id)
     {
-        $role->delete();
+        $role = $this->roleRepository->find($id);
 
-        return redirect()->route('admin.roles.index');
+        if (empty($role)) {
+            Flash::error('Role not found');
+
+            return redirect(route('admin.roles.index'));
+        }
+
+        $this->roleRepository->delete($id);
+        $message = 'Role supprimé avec succès.';
+        if(request()->ajax()) {
+            return HttpUtil::sendSuccessDialogResponse('Bidon supprimé avec succès');
+        }
+        Flash::success($message);
+
+        return redirect(route('admin.roles.index'));
     }
 }

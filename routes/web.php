@@ -11,16 +11,31 @@
 |
 */
 
+
+Route::auth();
+Route::get('/home', 'HomeController@index');
+Route::get('/password/reset', 'ResetPasswordController@index');
+
+// Authentication Routes...
+
+ //Route::resource('login', 'Auth\LoginController@login')->name('auth.login');
+ //Route::resource('logout', 'Auth\LoginController@logout')->name('auth.logout');
+
 Route::redirect('/', '/login');
 
 Auth::routes(['register' => false]);
 
+Route::resource('/roles' , 'RoleController');
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     
-    Route::resource('users', 'UsersController');
+    Route::resource('/users' , 'UserController');
+    //Route::resource('users', 'UsersController');
     Route::resource('roles', 'RoleController');
 
 });
+
+Route::resource('documents', 'DocumentController');
+
+Route::resource('bidons', 'BidonController');

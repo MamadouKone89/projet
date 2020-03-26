@@ -1,277 +1,170 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <title>InfyOm Generator</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-  <title>Chaine | Administrative</title>
-<!-- Font Awesome Icons -->
+    <!-- Bootstrap 3.3.7 -->
 
-  <!-- Theme style -->
-  
-  <!-- Theme style -->
- 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <link rel="stylesheet" href="{{ asset('css/app.css')}}">
- <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" />
-    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/all.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/buttons.dataTables.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/coreui.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/min/dropzone.min.css') }}" rel="stylesheet" />
-  <link rel="stylesheet" href="{{ asset('css/adminlte.min.css')}}">
-   <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css')}}">
- <link rel="stylesheet" href="{{ asset('css/fontawesome.css')}}">
-  <link rel="stylesheet" href="{{ asset('css/all.min.css')}}">
-   <link rel="stylesheet" href="{{ asset('css/icon.min.css')}}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.3/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.3/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="{{asset('css/select2.min.css')}}">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/_all.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
+
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+
+    @yield('css')
 </head>
-<body class="hold-transition sidebar-mini">
-<div class="wrapper">
 
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-dark navbar-dark-primary">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link"></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link"></a>
-      </li>
-    </ul>
+<body class="skin-blue sidebar-mini">
+@if (!Auth::guest())
+    <div class="wrapper">
+        <!-- Main Header -->
+        <header class="main-header">
 
-    <!-- SEARCH FORM -->
-   
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-      
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Brad Diesel
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message bro</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
-      </li>
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          
-          <span class="text-sm"><strong>{{ Auth::user()->name }}</strong></span>
-        </a>
-        
-    </ul>
-  </nav>
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4 " style="background-color: #870913;">
-    <!-- Brand Logo -->
-    <a href="#" class="brand-link">
-      <img src="/img/Logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-4"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light"><strong>Minstère de la Justice</strong></span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block"></a>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Administration
-                <i class="right fas fa-angle-left"></i>
-              </p>
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <b>InfyOm</b>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('admin.users.index') }}" class="nav-link ">
-                <i class="fas fa-user"></i>
-                  <p>Utilisateur</p>
+
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('admin.roles.index') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Role</p>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="http://infyom.com/images/logo/blue_logo_150x150.jpg"
+                                     class="user-image" alt="User Image"/>
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs">{!! Auth::user()->name !!}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- The user image in the menu -->
+                                <li class="user-header">
+                                    <img src="http://infyom.com/images/logo/blue_logo_150x150.jpg"
+                                         class="img-circle" alt="User Image"/>
+                                    <p>
+                                        {!! Auth::user()->name !!}
+                                        <small>Member since {!! Auth::user()->created_at->format('M. Y') !!}</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="{!! url('/logout') !!}" class="btn btn-default btn-flat"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            Sign out
+                                        </a>
+                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Left side column. contains the logo and sidebar -->
+        @include('layouts.sidebar')
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            @yield('content')
+        </div>
+
+        <!-- Main Footer -->
+        <footer class="main-footer" style="max-height: 100px;text-align: center">
+            <strong>Copyright © {{date('Y')}} <a href="#">Company</a>.</strong> All rights reserved.
+        </footer>
+
+    </div>
+@else
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+
+                <!-- Collapsed Hamburger -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#app-navbar-collapse">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <!-- Branding Image -->
+                <a class="navbar-brand" href="{!! url('/') !!}">
+                    InfyOm Generator
                 </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="{{ ('logout') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-               Déconnexion
-                <span class="right badge badge-danger"></span>
-              </p>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
+            </div>
+
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+                    <li><a href="{!! url('/home') !!}">Home</a></li>
+                </ul>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Authentication Links -->
+                    <li><a href="{!! url('/login') !!}">Login</a></li>
+                    <li><a href="{!! url('/register') !!}">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.sidebar -->
-  </aside>
+    @endif
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark"></h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active"></li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+    <!-- jQuery 3.1.1 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.3/js/adminlte.min.js"></script>
+    <script src="{{asset('js/select2.min.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('assets/users/user.js') }}"></script>
+    <script src="{{ asset('assets/roles/role.js') }}"></script>
+    <script src="{{asset('js/bootstrap-toggle.min.js')}}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
 
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-       
-       @yield('content')
-
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-    <div class="p-3">
-      <h5>Title</h5>
-      <p>Sidebar content</p>
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-
-  <!-- Main Footer -->
-  <footer class="main-footer" style="background-color: f73f0d;">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-      
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2020 <a href="https://www.justice.gov.bf">DSI Ministère de la Justice</a>.</strong> Tous droits réservés.
-  </footer>
-</div>
-
-
-<!-- Bootstrap 4 -->
-
-<!-- AdminLTE App -->
-
-<script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-
-
-<!-- Bootstrap 4 -->
-<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-
-<!-- AdminLTE App -->
-
-<script src="{{ asset('js/adminlte.min.js') }}"></script>
-<script src="{{ asset('js/ionicons.min.js') }}"></script>
- <script src="{{ asset('js/jquery.min.js') }}"></script>
- <script src="{{ asset('js/bootstrap.min.js') }}"></script>
- <script src="{{ asset('js/popper.min.js') }}"></script>
- <script src="{{ asset('js/coreui.min.js') }}"></script>
- <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
- <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
- <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
- <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
- <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
- <script src="{{ asset('js/buttons.print.min.js') }}"></script>
- <script src="{{ asset('js/buttons.colVis.min.js') }}"></script>
- <script src="{{ asset('js/pdfmake.min.js') }}"></script>
- <script src="{{ asset('js/vfs_fonts.js') }}"></script>
- <script src="{{ asset('js/jszip.min.js') }}"></script>
- <script src="{{ asset('js/dataTables.select.min.js') }}"></script>
- <script src="{{ asset('js/ckeditor.js') }}"></script>
- <script src="{{ asset('js/moment.min.js') }}"></script>
- <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
- <script src="{{ asset('js/select2.full.min.js') }}"></script>
- <script src="{{ asset('js/min/dropzone.min.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

@@ -1,34 +1,37 @@
-@extends('layouts.master')
+@extends('layouts.app')
+@section('title' , 'Modifier un Role')
+@section('breadcrumb')
+    <li class="breadcrumb-item">
+        <a href="{!! route('admin.roles.index') !!}">
+            Liste des Roles
+        </a>
+    </li>
+    <li class="breadcrumb-item active">
+        <a>Modifier un Role</a>
+    </li>
+@endsection
+
 @section('content')
-
-<div class="card">
-    <div class="card-header">
-        MODIFICATION Du ROLE
-    </div>
-
-    <div class="card-body">
-        <form action="{{ route("admin.roles.update", [$role->id]) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                <label for="name">Nom du role*</label>
-                <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($role) ? $role->name : '') }}" required>
-                @if($errors->has('name'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('name') }}
-                    </em>
-                @endif
-                <p class="helper-block">
-                    
-                </p>
+    <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card">
+            <div class="card-header card-primary">
+                <h3 class="card-title card-primary__title">Modifier un Role</h3>
             </div>
-            
-            <div>
-                <input class="btn btn-danger" type="submit" value="Enregistrer">
-            </div>
-        </form>
-
-
+            <!-- /.card-header -->
+            <!-- form start -->
+            {!! Form::model($role, ['id' => "edit-Role-form", 'class' => 'main-form' , 'route' => ['admin.roles.update', $role->id], 'method' => 'patch']) !!}
+                <div class="card-body row">
+                    @include('admin.roles.fields')
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-success">Valider</button>
+                    <a href = "{!! route('admin.roles.store') !!}"
+                        type="submit" class="btn btn-primary">
+                        Retourner à liste des Roles
+                    </a>
+                </div>
+            {!! Form::close() !!}
+        </div>
     </div>
-</div>
 @endsection

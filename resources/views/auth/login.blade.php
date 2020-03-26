@@ -1,77 +1,148 @@
-@extends('layouts.app')
-@section('content')
-<link href="{{asset('css/login.css')}}" rel="stylesheet" />
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div class="row justify-content-md-center">
-    <div class="col-md-6">
-        <div class="card-group">
-            <div class="card p-4">
-                <div class="card-body">
-                    @if(\Session::has('message'))
-                        <p class="alert alert-info">
-                            {{ \Session::get('message') }}
-                        </p>
-                    @endif
-                   
-                    <form method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-                     
-                        <h1>  <p class="text-center">----FENETRE DE CONNEXION----</p></h1>
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-user"></i>
-                                </span>
-                            </div>
-                            <input name="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required autofocus placeholder="Email" value="{{ old('email', null) }}">
-                            @if($errors->has('email'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('email') }}
-                                </div>
+        <title>{{ config('app.name', 'Laravel') }}</title>
+        <link rel="stylesheet" href="{!!url('/css/adminlte.css')!!}">
+        <link rel="stylesheet" href="{!! url('css/adminlte.css')!!}">
+    </head>
+    <body>
+        <div id="app">
+            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+                <div class="container">
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        <img src="/img/Logo.jpg" width="100px" class="brand-image img-circle elevation-3"
+                             style="opacity: .8">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Left Side Of Navbar -->
+                        <ul class="navbar-nav mr-auto">
+
+                        </ul>
+
+                        <!-- Right Side Of Navbar -->
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Authentication Links -->
+                            @guest
+                            <li class="nav-item">
+                                <img src="/img/Logo.jpg" width="100px" class="brand-image img-circle elevation-3"
+                                     style="opacity: .8">
+                            </li>
+                            @if (Route::has('register'))
+                            <li class="nav-item">
+                                <!-- <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>-->
+                            </li>
                             @endif
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-lock"></i></span>
-                            </div>
-                            <input name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required placeholder="Password">
-                            @if($errors->has('password'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('password') }}
-                                </div>
-                            @endif
-                        </div>
-
-                        <div class="input-group mb-4">
-                            <div class="form-check checkbox">
-                                <input class="form-check-input" name="remember" type="checkbox" id="remember" style="vertical-align: middle;" />
-                                <label class="form-check-label" for="remember" style="vertical-align: middle;">
-                                   Se souvenir de moi
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary px-4">
-                                   CONNEXION
-                                </button>
-                            </div>
-                            <div class="col-6 text-right">
-                                <a class="btn btn-link px-0" href="{{ route('password.request') }}">
-                                  Mot de passe oublier
+                            @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                               document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                    <a class="dropdown-item"  href="{{route('admin.users.index')}}">Liste des utilisateurs</a>
+                                </div>
+                            </li>
+                            @endguest
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <main class="py-4">
+                <link href="{{asset('css/login.css')}}" rel="stylesheet" />
+
+                <div class="row justify-content-md-center">
+                    <div class="col-md-6">
+                        <div class="card">
+
+                            <div class="card-header" style="background-color: #00AA9E;">
+                                <strong><h1><i class="fa fa-cogs"></i>  PAGE DE CONNEXION</h1></strong> 
+                            </div>
+                            <div class="card-body">
+                                @if(\Session::has('message'))
+                                <p class="alert alert-info">
+                                    {{ \Session::get('message') }}
+                                </p>
+                                @endif
+
+                                <form method="POST" action="{{ route('login') }}">
+                                    {{ csrf_field() }}
+
+
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                        </div>
+                                        <input name="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required autofocus placeholder="Email" value="{{ old('email', null) }}">
+                                        @if($errors->has('email'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('email') }}
+                                        </div>
+                                        @endif
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                        </div>
+                                        <input name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required placeholder="Password">
+                                        @if($errors->has('password'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('password') }}
+                                        </div>
+                                        @endif
+                                    </div>
+
+                                    <div class="input-group mb-4">
+                                        <div class="form-check checkbox">
+                                            <input class="form-check-input" name="remember" type="checkbox" id="remember" style="vertical-align: middle;" />
+                                            <label class="form-check-label" for="remember" style="vertical-align: middle;">
+                                                Se souvenir de moi
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <button type="submit" class="btn btn-primary px-4">
+                                                <i class="fa fa-btn fa-sign-in"></i>CONNEXION
+                                            </button>
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <a class="btn btn-link px-0" href="{{ route('password.request') }}">
+                                                Mot de passe oublier
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
+            </main>
         </div>
-    </div>
-     
-</div>
-
-@endsection
+    </body>
+</html>

@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\Role;
+use DataTable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
+
 
 class UsersController extends Controller
 {
@@ -26,7 +29,7 @@ class UsersController extends Controller
       $users = User::all();
 
 
-        return view('admin.users.index')->with('users', $users);
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -36,9 +39,12 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $roles=Role::get()->pluck('name', 'name');
+         
+        $relations = [
+            'roles' => \App\Role::get()->pluck('name', 'id')
+        ];
 
-        return view('admin.users.create', compact('roles'));
+        return view('admin.users.create', $relations);
     }
 
     /**
@@ -72,15 +78,15 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @@param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
     {
         $roles = Role::get()->pluck('name', 'name');
-        return view('admin.users.edit', [
-            'user' => $user
-        ] );
+
+        return view('admin.users.edit', compact('user', 'roles'));
+        
     }
 
     /**
@@ -95,7 +101,7 @@ class UsersController extends Controller
         
         $user->update($request->all());
         $roles = $request->input('roles') ? $request->input('roles') : [];
-        $user->syncRoles($roles);
+       $user->syncRoles($roles);
 
         return redirect()->route('admin.users.index');
     }

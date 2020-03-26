@@ -13,14 +13,17 @@ class CreatForeignKeyForRoleUserTable extends Migration
      */
     public function up()
     {
+        if(! Schema::hasTable('role_user')) {
         Schema::table('role_user', function (Blueprint $table) {
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+           
             
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+           
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
           
         });
     }
-
+    }
     /**
      * Reverse the migrations.
      *
@@ -30,8 +33,8 @@ class CreatForeignKeyForRoleUserTable extends Migration
     {
         
         Schema::table('role_user', function (Blueprint $table) {
-            $table->$table->dropForeign('role_user_role_id_foreign');
-            $table->$table->dropForeign('role_user_user_id_foreign');
+           $table->dropForeign('role_user_role_id_foreign');
+           $table->dropForeign('role_user_user_id_foreign');
             
            
         });

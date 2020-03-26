@@ -1,112 +1,103 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@yield('title')</title>
+        @section('styles')
+            {!! Html::style('css/HoldOn.min.css') !!}
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" />
-    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/all.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/buttons.dataTables.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/coreui.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/min/dropzone.min.css') }}" rel="stylesheet" />
+            <link rel="stylesheet" href="{!! url('/css/adminlte.css') !!}">
+            <link rel="stylesheet" href="{!! url('/css/select2.min.css') !!}">
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+            <link rel="stylesheet" href="{!! url('/css/ionicons.min.css') !!}">
+            <link rel="stylesheet" href="{!! url('/css/_all-skins.min.css') !!}">
+            <link rel="stylesheet" href="{!! url('/css/sweetalert.min.css') !!}">
+            <link rel="stylesheet" href="{!! url('/css/daterangepicker.css') !!}">
+            {!! Html::style('plugins/dark-tooltip/darktooltip.css') !!}
+            <link rel="stylesheet" href="{!! url('/css/custom.css') !!}">
+            <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+         <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
 
-                    </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                    <a class="dropdown-item"  href="{{route('admin.users.index')}}">Liste des utilisateurs</a>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+            <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        @show
+    </head>
+    <body class="hold-transition sidebar-mini">
+        <div class="wrapper">
+            <!-- Navbar -->
+            @include('partials.header')
+            @include('partials.aside-left')
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 class="m-0 text-dark">@yield('main-title')</h1>
+                            </div><!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item">
+                                        <a href="{!! url('/') !!}">Accueil</a>
+                                    </li>
+                                    @yield('breadcrumb')
+                                </ol>
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
                 </div>
-            </div>
-        </nav>
+                <!-- /.content-header -->
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
-    <script src="{{asset('js/app.js')}}"></script>
-     <script src="{{ asset('js/jquery.min.js') }}"></script>
- <script src="{{ asset('js/bootstrap.min.js') }}"></script>
- <script src="{{ asset('js/popper.min.js') }}"></script>
- <script src="{{ asset('js/coreui.min.js') }}"></script>
- <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
- <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
- <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
- <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
- <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
- <script src="{{ asset('js/buttons.print.min.js') }}"></script>
- <script src="{{ asset('js/buttons.colVis.min.js') }}"></script>
- <script src="{{ asset('js/pdfmake.min.js') }}"></script>
- <script src="{{ asset('js/vfs_fonts.js') }}"></script>
- <script src="{{ asset('js/jszip.min.js') }}"></script>
- <script src="{{ asset('js/dataTables.select.min.js') }}"></script>
- <script src="{{ asset('js/ckeditor.js') }}"></script>
- <script src="{{ asset('js/moment.min.js') }}"></script>
- <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
- <script src="{{ asset('js/select2.full.min.js') }}"></script>
- <script src="{{ asset('js/min/dropzone.min.js') }}"></script>
-</body>
+                <!-- Main content -->
+                <div class="content">
+                    <div class="container-fluid">
+
+                        @yield('content')
+
+                    </div><!-- /.container-fluid -->
+                </div>
+                <!-- /.content -->
+            </div>
+            <!-- /.control-sidebar -->
+
+            <!-- Main Footer -->
+            <footer class="main-footer" style="background-color: f73f0d;text-align:center;" >
+                <!-- To the right -->
+                <div class="float-right d-none d-sm-inline">
+
+                </div>
+                <!-- Default to the left -->
+                <strong>Copyright &copy; 2020 <a href="https://www.justice.gov.bf">DSI Ministère de la Justice</a>.</strong> Tous droits réservés.
+            </footer>
+        </div>
+        @section('scripts')
+        <script src="{{ asset('assets/users/user.js') }}"></script>
+<script src="{{ asset('assets/roles/role.js') }}"></script>
+<script src="{{asset('js/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/custom.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/select2.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/moment.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/bootstrap-datetimepicker.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/bootstrap-toggle.min.js')}}" type="text/javascript"></script>
+
+            <script>var ajaxFormHandlerSuccessCallback = null;</script>
+            <script src="{{asset('js/select2.min.js')}}" type="text/javascript"></script>
+            {!! Html::script('plugins/jquery/jquery.min.js') !!}
+            {!! Html::script('plugins/jquery-ui/jquery-ui.min.js') !!}
+            {!! Html::script('plugins/bootstrap/js/bootstrap.bundle.min.js') !!}
+            {!! Html::script('js/sweetalert2.all.min.js') !!}
+            {!! Html::script('js/HoldOn.min.js') !!}
+            {!! Html::script('js/deleteHandler.js') !!}
+            {!! Html::script('js/ajaxFormHandler.js') !!}
+            {!! Html::script('js/adminlte.min.js') !!}
+            {!! Html::script('plugins/dark-tooltip/jquery.darktooltip.js') !!}
+
+        @show()
+    </body>
 </html>

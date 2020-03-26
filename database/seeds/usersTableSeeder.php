@@ -20,17 +20,23 @@ class usersTableSeeder extends Seeder
         user::truncate();
         DB::table('role_user')->truncate();
 
-       $admin = user::create([
-            'name'=>'admin',
+       $admin = user::create([       
             'email'=>'doumamsamed@gmail.com',
-            'password'=>Hash::make('password')
+            'password'=>Hash::make('password'),
+            'name'=>'admin',
+            'prenom'=>'admin',
+            'structure'=>'DSI',
+            'telephone'=>'70202310'
             ]);
 
             
-       $utilisateur = user::create([
-        'name'=>'user',
+       $utilisateur = user::create([     
         'email'=>'user@gmail.com',
-        'password'=>Hash::make('password')
+        'password'=>Hash::make('password'),
+        'name'=>'user',
+        'prenom'=>'utilisateur',
+        'structure'=>'DSI',
+        'telephone'=>'60202310'
         ]);
         
 

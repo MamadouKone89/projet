@@ -1,33 +1,42 @@
-@extends('layouts.master')
-@section('content')
+@extends('layouts.app')
+@section('title' , 'Créer un Role')
 
-<div class="card">
-    <div class="card-header">
-       CREATION DES ROLES
-    </div>
-
-    <div class="card-body">
-        <form action="{{ route("admin.roles.store") }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                <label for="name">Nom du role*</label>
-                <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($role) ? $role->name : '') }}" required>
-                @if($errors->has('name'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('name') }}
-                    </em>
-                @endif
-                <p class="helper-block">
-                   
-                </p>
-            </div>
-            
-            <div>
-                <input class="btn btn-danger" type="submit" value="Enregistrer">
-            </div>
-        </form>
-
-
-    </div>
-</div>
+@section('breadcrumb')
+    <li class="breadcrumb-item">
+        <a href="{!! route('admin.roles.index') !!}">
+            Liste des Roles
+        </a>
+    </li>
+    <li class="breadcrumb-item active">
+        <a>Créer un Role</a>
+    </li>
 @endsection
+
+@section('content')
+    <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card">
+            <div class="card-header card-primary">
+                <h3 class="card-title card-primary__title">Créer un Role</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form 
+                method="POST"
+                class = "main-form" role="form" action = "{!! route('admin.roles.store') !!}"
+                id = "create-Role-form">
+                {!! csrf_field() !!}
+                <div class="card-body row">
+                    @include('admin.roles.fields')
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-success">Valider</button>
+                    <a href = "{!! route('admin.roles.index') !!}"
+                        type="submit" class="btn btn-primary">
+                        Retourner à liste des Roles
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection('content')
